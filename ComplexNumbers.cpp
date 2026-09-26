@@ -158,16 +158,24 @@ bool ComplexNumbers::operator!=(const ComplexNumbers& other) const
 // Display complex number
 ostream& operator<<(ostream& out, const ComplexNumbers& number)
 {
+    if (number.real == 0.0 && number.imaginary == 0.0)
+    {
+        out << 0;
+        return out;
+    }
+
+    if (number.real == 0.0)
+    {
+        out << number.imaginary << "i";
+        return out;
+    }
+
     out << number.real;
 
-    if (number.imaginary > 0)
-    {
+    if (number.imaginary > 0.0)
         out << " + " << number.imaginary << "i";
-    }
-    else if (number.imaginary < 0)
-    {
+    else if (number.imaginary < 0.0)
         out << " - " << -number.imaginary << "i";
-    }
 
     return out;
 }
@@ -192,8 +200,5 @@ ComplexNumbers operator*(double constant, const ComplexNumbers& number)
 // value / C2
 ComplexNumbers operator/(double constant, const ComplexNumbers& number)
 {
-    return ComplexNumbers(
-        constant / number.real,
-        constant / number.imaginary
-    );
+    return ComplexNumbers(constant, 0.0) / number;
 }

@@ -8,6 +8,7 @@
 #include "input.h"
 #include "RationalNumber.h"
 #include "Polynomials.h"
+#include "ComplexNumbers.h"
 
 
 using namespace std;
@@ -23,6 +24,9 @@ void reduceFraction(long long& numerator, long long& denominator); // Function t
 void displayPolynomial();
 void displayPolynomialMenuA();
 
+void displayComplexNumbers();
+void complexNumbersOptionA();
+
 int main()
 {
 	bool running = true;
@@ -35,7 +39,7 @@ int main()
 		switch (option)
 		{
 		case '1':
-			cout << "\n\tComplex Numbers\n";
+			displayComplexNumbers();
 			break;
 		case '2':
 			Rational();
@@ -810,4 +814,213 @@ void displayPolynomialMenuA()
 			break;
 		}
 	}
+} 
+
+void displayComplexNumbers()
+{
+	bool running = true;
+	char option;
+	ComplexNumbers c1, c2;
+
+	while (running)
+	{
+		system("cls");
+		cout << "\n\tA complex number is a number that can be expressed in the form a + b i, where a and b are real";
+		cout << "\n\tnumbers, and i represents the \"imaginary uni\", satisfying the equation i^2 = -1. Because no";
+		cout << "\n\treal number satisfies this equation, i is called an imaginary number. For the complex number";
+		cout << "\n\ta + b i, a is called the real part and b is called the imaginary part.";
+		cout << "\n\n\t1> Complex Numbers";
+		cout << "\n\t" << string(90, char(205));
+		cout << "\n\t\tA> A Complex Number";
+		cout << "\n\t\tB> Multiple Complex Numbers";
+		cout << "\n\t" << string(90, char(196));
+		cout << "\n\t\t0> return";
+		cout << "\n\t" << string(90, char(205));
+		option = inputChar("\n\t\tOption: ", static_cast<string>("AB0"));
+		switch (option)
+		{
+		case 'A':
+			complexNumbersOptionA();
+
+			break;
+		case 'B':
+			system("cls");
+			cout << "\n\tB> Multiple Complex Numbers";
+			break;
+		case '0':
+			running = false;
+			break;
+		default:
+			cout << "\n\tERROR: Invalid option";
+			break;
+		}
+		if (running)
+			system("pause");
+	}
+
 }
+
+
+
+void complexNumbersOptionA()
+{
+	bool running = true;
+	int option;
+
+	ComplexNumbers c1;
+
+	while (running)
+	{
+		system("cls");
+
+		cout << "\n\tA> A Complex Number";
+		cout << "\n\t" << string(90, char(205));
+		cout << "\n\t\t1. Enter the real number";
+		cout << "\n\t\t2. Enter the imaginary number";
+		cout << "\n\t\t3. Display the complex number";
+		cout << "\n\t\t4. Negate the complex number";
+		cout << "\n\t\t5. Add (+) the complex number with a constant";
+		cout << "\n\t\t6. Subtract (-) the complex number with a constant";
+		cout << "\n\t\t7. Multiply (*) the complex number with a constant";
+		cout << "\n\t\t8. Divide (/) the complex number with a constant";
+		cout << "\n\t" << string(90, char(196));
+		cout << "\n\t\t0. return";
+		cout << "\n\t" << string(90, char(205));
+
+		option = inputInteger("\n\t\tOption: ", 0, 8);
+
+		switch (option)
+		{
+		case 1:
+		{
+			double real = inputDouble("\n\t\tEnter a number (double value) for the real part: ");
+
+			c1.setReal(real);
+			cout << "\n";
+			system("pause");
+			break;
+		}
+
+		case 2:
+		{
+			double imaginary = inputDouble("\n\t\tEnter a number (double value) for the imaginary part: ");
+			c1.setImaginary(imaginary);
+			cout << "\n";
+			system("pause");
+			break;
+		}
+
+		case 3:
+		{
+			cout << "\n\t\tComplex number C1 = " << c1 << "\n\n";
+
+			system("pause");
+			break;
+		}
+		case 4:
+		{
+			// Make C2 a copy of C1
+			ComplexNumbers c2 = c1;
+
+			cout << "\n\t\tNegated the complex number C2 (a copy of C1)\n";
+
+			cout << "\n\t\t-(" << c1 << ") = " << -c2 << "\n\n";
+
+			system("pause");
+			break;
+		}
+		case 5:
+		{
+			ComplexNumbers c2 = c1;
+
+			double value = inputDouble("\n\t\tEnter a value (double): ");
+
+			cout << "\n\t\tC2 + value";
+			cout << "\n\t\t(" << c2 << ") + " << value << " = " << c2 + value;
+
+			cout << "\n\n\t\tvalue + C2";
+			cout << "\n\t\t" << value << " + (" << c2 << ") = " << value + c2 << "\n\n";
+
+			system("pause");
+			break;
+		}
+		case 6:
+		{
+			ComplexNumbers R2 = c1;
+
+			double value = inputDouble("\n\t\tEnter a value (double): ");
+
+			cout << "\n\t\tR2 - value";
+			cout << "\n\t\t(" << R2 << ") - " << value << " = " << R2 - value;
+
+			cout << "\n\n\t\tvalue - R2";
+			cout << "\n\t\t" << value << " - (" << R2 << ") = " << value - R2 << "\n\n";
+
+			system("pause");
+			break;
+		}
+		case 7:
+		{
+			ComplexNumbers c2 = c1;
+
+			double value = inputDouble("\n\t\tEnter a value (double): ");
+
+			cout << "\n\t\tC2 * value";
+			cout << "\n\t\t(" << c2 << ") * " << value << " = " << c2 * value;
+
+			cout << "\n\n\t\tvalue * C2";
+			cout << "\n\t\t" << value << " * (" << c2 << ") = " << value * c2 << "\n\n";
+
+			system("pause");
+			break;
+		}
+		case 8:
+		{
+			ComplexNumbers c2 = c1;
+
+			double value = inputDouble(
+				"\n\t\tEnter a value (double): ");
+
+			// C2 / value
+			cout << "\n\t\tC2 / value";
+			cout << "\n\t\t(" << c2 << ") / "
+				<< value << " = ";
+
+			if (value == 0)
+			{
+				cout << "undefined";
+			}
+			else
+			{
+				cout << c2 / value;
+			}
+
+
+			// value / C2
+			cout << "\n\n\t\tvalue / C2";
+			cout << "\n\t\t" << value
+				<< " / (" << c2 << ") = ";
+
+			if (c2.getReal() == 0 && c2.getImaginary() == 0)
+			{
+				cout << "undefined";
+			}
+			else
+			{
+				cout << value / c2;
+			}
+
+			cout << "\n\n";
+
+			system("pause");
+			break;
+		}
+
+		case 0:
+			running = false;
+			break;
+		}
+	}
+}
+
+

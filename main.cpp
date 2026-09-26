@@ -1,4 +1,4 @@
-//Name: Hany, Aleeza, and Tuniphn
+//Name: Hany, Aleeza, and Thanh
 // Date: 9/18/2026
 // Description: Module 4 - Pointer and Dynamic Memory Allocation
 
@@ -26,6 +26,7 @@ void displayPolynomialMenuA();
 
 void displayComplexNumbers();
 void complexNumbersOptionA();
+void complexNumbersOptionB();
 
 int main()
 {
@@ -43,11 +44,11 @@ int main()
 			break;
 		case '2':
 			Rational();
-			
+
 			break;
 		case '3':
 			displayPolynomial();
-			
+
 			break;
 		case '0':
 			running = false;
@@ -65,7 +66,7 @@ int main()
 char menuOption()
 {
 
-	cout << "\tCMPR131 Chapter 4: Complex Numbers, Rational Numbers, Polynomials by Hany, Aleeza, and Tuniphn (09/18/26)\n";
+	cout << "\tCMPR131 Chapter 4: Complex Numbers, Rational Numbers, Polynomials by Hany, Aleeza, and Thanh (09/18/26)\n";
 	cout << "\t" << string(105, char(205));
 	cout << "\n\t\t1 > Complex Numbers";
 	cout << "\n\t\t2 > Rational Numbers";
@@ -106,11 +107,11 @@ void Rational()
 		{
 		case 'A':
 			rationalOptionA(rational);
-			
+
 			break;
 		case 'B':
 			rationalOptionB(rational);
-			
+
 			break;
 		case '0':
 			running = false;
@@ -150,7 +151,7 @@ void rationalOptionA(RationalNumber& rational)
 
 		switch (option)
 		{
-		case '1': 
+		case '1':
 		{
 			int numerator = inputInteger("\n\t\t\tEnter an integer for the numerator: "); // Prompt the user for an integer value and validate the input to ensure it is an integer
 			rational.setNumerator(numerator); // Set the numerator of the rational number to the user input
@@ -210,7 +211,7 @@ void rationalOptionA(RationalNumber& rational)
 		}
 		case '6': // Add the rational number with a constant by creating a copy of it and calling the overloaded + operator with a constant
 		{
-			int value = inputInteger("\n\t\t\tEnter an integer value: "); 
+			int value = inputInteger("\n\t\t\tEnter an integer value: ");
 			RationalNumber R2(rational); // Create a copy of the rational number to perform the addition operation
 			RationalNumber constant(value, ONE); // Create a RationalNumber object with the constant value and a denominator of 1
 
@@ -339,7 +340,7 @@ void rationalOptionB(RationalNumber& rational)
 		cout << "\n\t\t\t2. Enter rational number R2";
 		cout << "\n\t\t\t3. Verify condition operators (==, !=, >=, >, <= and <) of R1 and R2";
 		cout << "\n\t\t\t4. Evaluate arithmatic operators (+, - , * and /) of R1 and R2";
-		cout << "\n\t\t\t5. Evaluate (3 * (R1 + R2) / 7) / (R2 - R1 / 9) >= 621/889"; 
+		cout << "\n\t\t\t5. Evaluate (3 * (R1 + R2) / 7) / (R2 - R1 / 9) >= 621/889";
 		cout << "\n\t\t" << string(100, char(196));
 		cout << "\n\t\t\t0> Return\n";
 		cout << "\t\t" << string(100, char(205));
@@ -693,7 +694,7 @@ void displayPolynomialMenuA()
 		option = toupper(inputChar("\n\t\tOption: ", static_cast<string>("1,2,3,4,5,0")));
 		switch (option)
 		{
-		case '1': 
+		case '1':
 		{
 			int terms = inputInteger("\n\t\tEnter the number of terms (1..100) for the polynomial: ", 1, 100);
 			polynomial.setTerm(terms);
@@ -723,7 +724,7 @@ void displayPolynomialMenuA()
 			break;
 		}
 
-			
+
 		case '3':
 		{
 			// No terms entered
@@ -814,7 +815,7 @@ void displayPolynomialMenuA()
 			break;
 		}
 	}
-} 
+}
 
 void displayComplexNumbers()
 {
@@ -844,8 +845,7 @@ void displayComplexNumbers()
 
 			break;
 		case 'B':
-			system("cls");
-			cout << "\n\tB> Multiple Complex Numbers";
+			complexNumbersOptionB();
 			break;
 		case '0':
 			running = false;
@@ -1023,4 +1023,104 @@ void complexNumbersOptionA()
 	}
 }
 
+void complexNumbersOptionB()
+{
+	bool running = true;
+	int option;
+	ComplexNumbers C1;
+	ComplexNumbers C2;
+	ComplexNumbers C3(1.07109, 0.120832);
+
+	while (running)
+	{
+		system("cls");
+		cout << "\n\tB> Multiple Complex Numbers";
+		cout << "\n\t" << string(90, char(205));
+		cout << "\n\t\t1. Enter complex number C1";
+		cout << "\n\t\t2. Enter complex number C2";
+		cout << "\n\t\t3. Verify condition operators (== and !=) of C1 and C2";
+		cout << "\n\t\t4. Evaluate arithmatic operators (+, - , * and /) of C1 and C2";
+		cout << "\n\t\t5. Evaluate steps in (3 * (C1 + C2) / 7) / (C2 - C1 / 9) != (1.07109 + 0.120832i) ?";
+		cout << "\n\t" << string(90, char(196));
+		cout << "\n\t\t0. return";
+		cout << "\n\t" << string(90, char(205));
+
+		option = inputInteger("\n\t\tOption: ", 0, 5);
+
+		switch (option)
+		{
+		case 1:
+		{
+			double real = inputDouble("\n\t\tEnter a number (double value) for the real part of C1: ");
+			double imag = inputDouble("\t\tEnter a number (double value) for the imaginary part of C1: ");
+			C1 = ComplexNumbers(real, imag);
+			cout << "\n\t\tC1 = " << C1 << "\n\n";
+			system("pause");
+			break;
+		}
+		case 2:
+		{
+			double real = inputDouble("\n\t\tEnter a number (double value) for the real part of C2: ");
+			double imag = inputDouble("\t\tEnter a number (double value) for the imaginary part of C2: ");
+			C2 = ComplexNumbers(real, imag);
+			cout << "\n\t\tC2 = " << C2 << "\n\n";
+			system("pause");
+			break;
+		}
+		case 3:
+			cout << boolalpha;
+			cout << "\n\t\tC1 == C2 -> (" << C1 << ") == (" << C2 << ") ? " << (C1 == C2);
+			cout << "\n\t\tC2 != C1 -> (" << C2 << ") != (" << C1 << ") ? " << (C2 != C1) << "\n\n";
+			system("pause");
+			break;
+		case 4:
+			cout << "\n\t\tAddition      : C1 + C2 -> (" << C1 << ") + (" << C2 << ") = " << (C1 + C2);
+			cout << "\n\t\tSubtraction   : C2 - C1 -> (" << C2 << ") - (" << C1 << ") = " << (C2 - C1);
+			cout << "\n\t\tMultiplication: C1 * C2 -> (" << C1 << ") * (" << C2 << ") = " << (C1 * C2);
+			cout << "\n\t\tDivision      : C2 / C1 -> (" << C2 << ") / (" << C1 << ") = ";
+			if (C1.getReal() == 0.0 && C1.getImaginary() == 0.0)
+				cout << "undefined";
+			else
+				cout << (C2 / C1);
+			cout << "\n\n";
+			system("pause");
+			break;
+		case 5:
+		{
+			ComplexNumbers sum = C1 + C2;
+			ComplexNumbers threeTimesSum = 3.0 * sum;
+			ComplexNumbers c1Over9 = C1 / 9.0;
+			ComplexNumbers denom = C2 - c1Over9;
+			ComplexNumbers threeTimesSumOver7 = threeTimesSum / 7.0;
+
+			cout << "\n\t\tC1 = " << C1;
+			cout << "\n\t\tC2 = " << C2;
+			cout << "\n\t\tC3 = " << C3;
+			cout << "\n\n\t\tEvaluating expression...";
+			cout << "\n\t\t\t    (3 * (C1 + C2) / 7) / (C2 - C1 / 9) != (" << C3 << ") ?";
+			cout << "\n\t\t   step #1: (3 * (" << sum << ") / 7) / (C2 - (" << c1Over9 << ")) != (" << C3 << ")";
+			cout << "\n\t\t   step #2: ((" << threeTimesSum << ") / 7) / (" << denom << ") != (" << C3 << ")";
+			cout << "\n\t\t   step #3: (" << threeTimesSumOver7 << ") / (" << denom << ") != (" << C3 << ")";
+
+			if (denom.getReal() == 0.0 && denom.getImaginary() == 0.0)
+			{
+				cout << "\n\t\t   step #4: undefined";
+				cout << "\n\t\t   step #5: undefined\n\n";
+			}
+			else
+			{
+				ComplexNumbers result = threeTimesSumOver7 / denom;
+				cout << boolalpha;
+				cout << "\n\t\t   step #4: (" << result << ") != (" << C3 << ") ?";
+				cout << "\n\t\t   step #5: " << (result != C3) << "\n\n";
+			}
+			system("pause");
+			break;
+		}
+		case 0:
+			running = false;
+			break;
+		}
+	}
+}
 

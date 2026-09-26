@@ -4,19 +4,24 @@
 
 #include <iostream>
 #include <sstream>
+#include <string>
 #include "input.h"
 #include "RationalNumber.h"
-#include <string>
+#include "Polynomials.h"
 
 
 using namespace std;
 
 // Function prototypes
-char manuOption();
+char menuOption();
 void Rational(); // Function to handle rational number operations
 void rationalOptionA(RationalNumber& rational); // function to handle rational number operations for option A
 void rationalOptionB(RationalNumber& rational); // function to handle rational number operations for option B
 void reduceFraction(long long& numerator, long long& denominator); // Function to reduce a fraction to its simplest form
+
+//function prototypes
+void displayPolynomial();
+void displayPolynomialMenuA();
 
 int main()
 {
@@ -26,7 +31,7 @@ int main()
 	while (running)
 	{
 		system("cls");
-		option = manuOption();
+		option = menuOption();
 		switch (option)
 		{
 		case '1':
@@ -37,7 +42,8 @@ int main()
 			
 			break;
 		case '3':
-			cout << "\n\tPolynomials\n";
+			displayPolynomial();
+			
 			break;
 		case '0':
 			running = false;
@@ -52,7 +58,7 @@ int main()
 }
 
 // Function to display the main menu and get the user's option
-char manuOption()
+char menuOption()
 {
 
 	cout << "\tCMPR131 Chapter 4: Complex Numbers, Rational Numbers, Polynomials by Hany, Aleeza, and Tuniphn (09/18/26)\n";
@@ -575,5 +581,233 @@ void reduceFraction(long long& numerator, long long& denominator)
 	{
 		numerator = -numerator;
 		denominator = -denominator;
+	}
+}
+
+//precondition: none
+//postcondition: displays information about polynomials and provides options for the user to perform operations on polynomials
+void displayPolynomial()
+{
+	Polynomials polynomial;
+	bool running = true;
+	char option;
+	while (running)
+	{
+		system("cls");
+		cout << "\n\tA polynomial is an expression consisting of variables(also called indeterminates) and";
+		cout << "\n\tcoefficients, that involves only the operations of addition, subtraction, multiplication,";
+		cout << "\n\tand non-negative integer exponentiation of variables.";
+		cout << "\n\n\t3> Polynomials";
+		cout << "\n\t" << string(90, char(205));
+		cout << "\n\t\tA> A Polynomial";
+		cout << "\n\t\tB> Multiple Polynomials";
+		cout << "\n\t" << string(90, char(196));
+		cout << "\n\t\t0> return";
+		cout << "\n\t" << string(90, char(205));
+		option = toupper(inputChar("\n\t\tOption: ", static_cast<string>("A,B,0")));
+		switch (option)
+		{
+		case 'A':
+			displayPolynomialMenuA(); // Call the function to display the menu for a single polynomial
+			break;
+		case 'B':
+		{
+			system("cls");
+			Polynomials first; // Create an instance of the Polynomials class to represent the first polynomial
+			Polynomials second; // Create an instance of the Polynomials class to represent the second polynomial
+			cout << "\n\tB> Two Polynomials";
+			int terms = inputInteger("\n\t\tEnter the number of terms(1..100) for the first polynomial (P1): ", 1, 100);
+			first.setTerm(terms);
+			// Prompt the user to enter the coefficients for each term of the first polynomial
+			for (int i = 0; i < first.getTerm(); i++)
+			{
+				cout << "\t\t\tEnter the coefficient for term#" << i + 1 << ": ";
+				double coefficientIndex = inputDouble("");
+				first.setCoefficient(i, coefficientIndex);
+			}
+			// Display the first polynomial entered by the user
+			cout << "\n\tThe first polynomial (P1) is entered: " << first << "\n";
+			terms = inputInteger("\n\t\tEnter the number of terms(1..100) for the second polynomial (P2): ", 1, 100);
+			second.setTerm(terms);
+			// Prompt the user to enter the coefficients for each term of the second polynomial
+			for (int i = 0; i < second.getTerm(); i++)
+			{
+				cout << "\t\t\tEnter the coefficient for term#" << i + 1 << ": ";
+				double coefficientIndex = inputDouble("");
+				second.setCoefficient(i, coefficientIndex);
+			}
+			// Display the second polynomial entered by the user
+			cout << "\n\tThe second polynomial (P2) is entered: " << second << "\n";
+			cout << "\n\t\tAddition of polynomials       -> P1 + P2 = " << first + second;
+			cout << "\n\t\tSubtraction of polynomials    -> P1 - P2 = " << first - second;
+			cout << "\n\t\tMultiplication of polynomials -> P1 * P2 = " << first * second;
+			double constant = inputDouble("\n\n\t\tEnter a constant value: ");
+			cout << "\n\t" << fixed << setprecision(6) << constant << " * Polynomial(P1) = ";
+			cout << defaultfloat << constant * first;
+			// Display the result of multiplying the first polynomial by the constant
+			cout << "\n\n\tPolynomial(P2) * " << fixed << setprecision(6) << constant << " = ";
+			cout << defaultfloat << second * constant << "\n";
+			cout << "\n";
+			system("pause");
+			break;
+		}
+
+
+		case '0':
+			running = false;
+			break;
+		default:
+			cout << "\n\tInvalid option. Please try again.\n";
+			break;
+		}
+	}
+
+
+	//return inputChar("\n\t\tOption: ", static_cast<string>("AB0"));
+}
+
+//precondition: none
+//postcondition: displays information about polynomials and provides options for the user to perform operations on a single polynomial
+void displayPolynomialMenuA()
+{
+	Polynomials polynomial;
+	bool running = true;
+	char option;
+	while (running)
+	{
+		system("cls");
+		cout << "\n\tA> Single Polynomial";
+		cout << "\n\t" << string(90, char(205));
+		cout << "\n\t\t1. Enter the number of terms";
+		cout << "\n\t\t2. Specify the coefficients";
+		cout << "\n\t\t3. Evaluate expression";
+		cout << "\n\t\t4. Solve for the derivative";
+		cout << "\n\t\t5. Solve for the integral";
+		cout << "\n\t" << string(90, char(196));
+		cout << "\n\t\t0> return";
+		cout << "\n\t" << string(90, char(205));
+		option = toupper(inputChar("\n\t\tOption: ", static_cast<string>("1,2,3,4,5,0")));
+		switch (option)
+		{
+		case '1': 
+		{
+			int terms = inputInteger("\n\t\tEnter the number of terms (1..100) for the polynomial: ", 1, 100);
+			polynomial.setTerm(terms);
+			cout << "\n";
+			system("pause");
+			break;
+		}
+		case '2':
+		{
+			if (polynomial.getTerm() == 0)
+			{
+				cout << "\n\t\tERROR: 0 term. Please enter the number of terms.\n\n";
+				system("pause");
+				break;
+			}
+
+			for (int i = 0; i < polynomial.getTerm(); i++)
+			{
+				cout << "\n\t\tEnter the coefficient for term #" << i + 1 << ": ";
+
+				double coefficientIndex = inputDouble("");
+				coefficientIndex += polynomial.getCoefficient(i); // Add the new coefficient to the existing coefficient for the term
+				polynomial.setCoefficient(i, coefficientIndex);  // Update the coefficient for the term with the new value
+			}
+			cout << "\n\t\tThe P(x) is entered: " << polynomial << "\n\n"; // Display the polynomial entered by the user
+			system("pause");
+			break;
+		}
+
+			
+		case '3':
+		{
+			// No terms entered
+			if (polynomial.getTerm() == 0)
+			{
+				cout << "\n\t\tERROR: 0 term. Please enter the number of terms.\n\n";
+				system("pause");
+				break;
+			}
+
+			// For 2 or more terms, coefficients must be specified
+			// Do not give this error when there is only 1 term
+			if (polynomial.getCoefficient(0) == 0 && polynomial.getTerm() > 1)
+			{
+				cout << "\n\t\tERROR: expression. Please specify the coefficients.\n\n";
+				system("pause");
+				break;
+			}
+
+			// Display the polynomial
+			cout << "\n\t\tP1(x) = " << polynomial << "\n";
+
+			double x = inputDouble("\n\t\tEnter the value of x to evaluate the polynomial: "); // Prompt the user to enter a value for x to evaluate the polynomial
+
+			// Evaluate and display the steps
+			polynomial.evaluate(x);
+			cout << "\n\n";
+			system("pause");
+
+			break;
+		}
+
+		case '4':
+		{
+			// No terms entered
+			if (polynomial.getTerm() == 0)
+			{
+				cout << "\n\t\tERROR: 0 term. Please enter the number of terms.\n\n";
+				system("pause");
+				break;
+			}
+
+			// Terms entered, but coefficients not specified
+			if (polynomial.getCoefficient(0) == 0 && polynomial.getTerm() > 1)
+			{
+				cout << "\n\t\tERROR: expression. Please specify the coefficients.\n\n";
+				system("pause");
+				break;
+			}
+
+			Polynomials derivative = polynomial.derivative(); // Call the derivative() function to calculate the derivative of the polynomial and store the result in a new Polynomials object
+			cout << "\n\t\tPolynomial(x) = " << polynomial;
+			cout << "\n\n\t\tDerivative    = " << derivative << "\n\n";
+
+			system("pause");
+			break;
+		}
+		case '5':
+		{
+			// No terms entered
+			if (polynomial.getTerm() == 0)
+			{
+				cout << "\n\t\tERROR: 0 term. Please enter the number of terms.\n\n";
+				system("pause");
+				break;
+			}
+
+			// Terms entered, but coefficients not specified
+			if (polynomial.getCoefficient(0) == 0 && polynomial.getTerm() > 1)
+			{
+				cout << "\n\t\tERROR: expression. Please specify the coefficients.\n\n";
+				system("pause");
+				break;
+			}
+			Polynomials integral = polynomial.integral(); // Call the integral() function to calculate the integral of the polynomial and store the result in a new Polynomials object
+			cout << "\n\t\tPolynomial(x) = " << polynomial;
+			cout << "\n\n\t\tIntegral      = " << integral << "\n\n";
+
+			system("pause");
+			break;
+		}
+
+		case '0':
+			running = false;
+			break;
+		default:
+			cout << "\n\tInvalid option. Please try again.\n";
+			break;
+		}
 	}
 }

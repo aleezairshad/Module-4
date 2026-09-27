@@ -431,7 +431,7 @@ void rationalOptionB(RationalNumber& rational)
 			RationalNumber addition = R1 + R2; // Call the overloaded + operator to add R1 and R2 and store the result in a new RationalNumber object
 			RationalNumber subtraction = R2 - R1; // Call the overloaded - operator to subtract R1 from R2 and store the result in a new RationalNumber object
 			RationalNumber multiplication = R1 * R2; // Call the overloaded * operator to multiply R1 and R2 and store the result in a new RationalNumber object
-			RationalNumber division = R2 / R1; // Call the overloaded / operator to divide R2 by R1 and store the result in a new RationalNumber object
+
 			// Display the results of the arithmetic operations
 			cout << "\n\t\t\tAddition      : R1 + R2 -> (";
 			R1.display();
@@ -459,7 +459,17 @@ void rationalOptionB(RationalNumber& rational)
 			cout << ") / (";
 			R1.display();
 			cout << ") = ";
-			division.display();
+
+			// Check if R1 is zero before dividing
+			if (R1.getNumerator() == 0)
+			{
+				cout << "undefined";
+			}
+			else
+			{
+				RationalNumber division = R2 / R1;
+				division.display();
+			}
 
 			cout << "\n\n";
 			system("pause");

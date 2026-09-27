@@ -23,6 +23,32 @@ Polynomials::Polynomials(const Polynomials& p)
 
     coefficientStatus = p.coefficientStatus;
 }
+
+// precondition: p is a valid Polynomials object
+// postcondition: assigns a deep copy of the given Polynomials object by copying its terms, allocating a new array for coefficients, and copying the coefficient values and status
+Polynomials& Polynomials::operator=(const Polynomials& p)
+{
+    if (this == &p)
+    {
+        return *this;
+    }
+
+    double* newCoefficient = new double[p.terms];
+
+    for (int i = 0; i < p.terms; i++)
+    {
+        newCoefficient[i] = p.coefficient[i];
+    }
+
+    delete[] coefficient;
+
+    coefficient = newCoefficient;
+    terms = p.terms;
+    coefficientStatus = p.coefficientStatus;
+
+    return *this;
+}
+
 // precondition: none
 // postcondition: deallocates the memory used for the coefficient array to prevent memory leaks
 Polynomials::~Polynomials()
@@ -71,10 +97,10 @@ void Polynomials::evaluate(double x) const
     double multiplied = 0;
     for (int i = 0; i < terms; i++)
     {
-		int exponent = terms - 1 - i; // Calculate the exponent for the current term
-        multiplied = coefficient[i] * pow(x, exponent); 
+        int exponent = terms - 1 - i; // Calculate the exponent for the current term
+        multiplied = coefficient[i] * pow(x, exponent);
         evaluated += multiplied;
-		cout << defaultfloat;
+        cout << defaultfloat;
 
         // Last term
         if (i == terms - 1)
@@ -90,7 +116,7 @@ void Polynomials::evaluate(double x) const
     cout << "\n\t\t" << string(40, char(196));
     // Return to normal number formatting
     cout << defaultfloat;
-	cout << "\n\t\t" << setw(13) << right << evaluated; // Display the evaluated result
+    cout << "\n\t\t" << setw(13) << right << evaluated; // Display the evaluated result
 }
 
 //void Polynomials::evaluate(double x) const
@@ -162,7 +188,7 @@ Polynomials Polynomials::derivative() const
 // postcondition: creates a new Polynomials object representing the integral of the current polynomial and returns it
 Polynomials Polynomials::integral() const
 {
-	const int ONE = 1;
+    const int ONE = 1;
     Polynomials integral;
 
     integral.setTerm(terms + ONE);

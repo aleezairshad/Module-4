@@ -737,7 +737,7 @@ void displayPolynomialMenuA()
 
 			// For 2 or more terms, coefficients must be specified
 			// Do not give this error when there is only 1 term
-			if (polynomial.getCoefficient(0) == 0 && polynomial.getTerm() > 1)
+			if (!polynomial.getCoefficientStatus())
 			{
 				cout << "\n\t\tERROR: expression. Please specify the coefficients.\n\n";
 				system("pause");
@@ -768,7 +768,7 @@ void displayPolynomialMenuA()
 			}
 
 			// Terms entered, but coefficients not specified
-			if (polynomial.getCoefficient(0) == 0 && polynomial.getTerm() > 1)
+			if (!polynomial.getCoefficientStatus())
 			{
 				cout << "\n\t\tERROR: expression. Please specify the coefficients.\n\n";
 				system("pause");
@@ -793,7 +793,7 @@ void displayPolynomialMenuA()
 			}
 
 			// Terms entered, but coefficients not specified
-			if (polynomial.getCoefficient(0) == 0 && polynomial.getTerm() > 1)
+			if (!polynomial.getCoefficientStatus())
 			{
 				cout << "\n\t\tERROR: expression. Please specify the coefficients.\n\n";
 				system("pause");
@@ -1123,4 +1123,3 @@ void complexNumbersOptionB()
 		}
 	}
 }
-

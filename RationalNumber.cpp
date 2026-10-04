@@ -18,12 +18,17 @@ RationalNumber::RationalNumber(const RationalNumber& other)
 }
 // precondition: num and denom are valid integers
 // postcondition: initializes the numerator and denominator to the given values, with denominator set to 1 if 0 is provided
+//Thanh modified this
+//I don't want this constructor to do the validation
 RationalNumber::RationalNumber(int num, int denom)
 {
 	numerator = num;
-	denominator = (denom == 0) ? 1 : denom; // Prevent division by zero
+	denominator = denom;
 
+	//denominator = (denom == 0) ? 1 : denom; // Prevent division by zero
 }
+
+
 //precondition: a and b are valid integers
 //postcondition: returns the greatest common divisor of a and b using the Euclidean algorithm
 int RationalNumber::gcd(int a, int b) const
@@ -45,11 +50,13 @@ int RationalNumber::gcd(int a, int b) const
 //postcondition: normalizes the rational number by ensuring the denominator is positive and reducing the fraction to its simplest form
 void RationalNumber::normalize()
 {
+	//Thanh modified this
+	/*
 	if (denominator == 0)
 	{
 		denominator = 1;
 	}
-
+	*/
 	if (denominator < 0)
 	{
 		numerator = -numerator;
@@ -68,13 +75,15 @@ void RationalNumber::normalize()
 void RationalNumber::setNumerator(int num)
 {
 	numerator = num;
-
 }
 //precondition: denom is a valid integer
 //postcondition: sets the denominator to the given value, with a check to prevent division by zero
+//Thanh modified this
+//I don't want setter and getter to modify or do validation
 void RationalNumber::setDenominator(int denom)
 {
-	denominator = (denom == 0) ? 1 : denom; // Prevent division by zero
+	denominator = denom;
+	//denominator = (denom == 0) ? 1 : denom; // Prevent division by zero
 }
 //precondition: none
 //postcondition: returns the numerator of the rational number
@@ -104,16 +113,30 @@ void RationalNumber::negate()
 //postcondition: returns the sum of the current rational number and the other rational number
 RationalNumber RationalNumber::operator+(const RationalNumber& other) const
 {
+	//Thanh added this part
+	//This if statement is to return a RationalNumber object later shows undefined by operator<<
+	//because one of the denominator is 0
+	if (denominator == 0 || other.denominator == 0)
+	{
+		return RationalNumber(0, 0);
+	}
+	//end of adding
 	int num = (numerator * other.denominator) + (other.numerator * denominator); // Cross-multiply to get a common denominator
 	int denom = denominator * other.denominator; // Multiply the denominators to get the new denominator
 	RationalNumber result(num, denom);
-	//result.normalize();
+	result.normalize(); //Thanh "un-commented" this, it should normalize
 	return result;
 }
 //precondition: other is a valid RationalNumber object
 //postcondition: returns the difference of the current rational number and the other rational number
 RationalNumber RationalNumber::operator-(const RationalNumber& other) const
 {
+	//Thanh added this part
+	if (denominator == 0 || other.denominator == 0)
+	{
+		return RationalNumber(0, 0);
+	}
+	//end of adding
 	int num = (numerator * other.denominator) - (other.numerator * denominator); // Cross-multiply to get a common denominator
 	int denom = denominator * other.denominator; // Multiply the denominators to get the new denominator
 	RationalNumber result(num, denom);
@@ -124,6 +147,12 @@ RationalNumber RationalNumber::operator-(const RationalNumber& other) const
 //postcondition: returns the product of the current rational number and the other rational number
 RationalNumber RationalNumber::operator*(const RationalNumber& other) const
 {
+	//Thanh added this part
+	if (denominator == 0 || other.denominator == 0)
+	{
+		return RationalNumber(0, 0);
+	}
+	//end of adding
 	int num = numerator * other.numerator; // Multiply the numerators
 	int denom = denominator * other.denominator; // Multiply the denominators
 	RationalNumber result(num, denom);
@@ -134,6 +163,13 @@ RationalNumber RationalNumber::operator*(const RationalNumber& other) const
 //postcondition: returns the quotient of the current rational number and the other rational number
 RationalNumber RationalNumber::operator/(const RationalNumber& other) const
 {
+	//Thanh added this part
+	//For division, I need to validate the numerator too
+	if (denominator == 0 || other.denominator == 0 || other.numerator == 0)
+	{
+		return RationalNumber(0, 0);
+	}
+	//end of adding
 	int num = numerator * other.denominator; // Multiply the numerator by the reciprocal of the other fraction
 	int denom = denominator * other.numerator; // Multiply the denominator by the reciprocal of the other fraction
 	RationalNumber result(num, denom);
@@ -175,4 +211,18 @@ bool RationalNumber::operator>(const RationalNumber& other) const
 bool RationalNumber::operator>=(const RationalNumber& other) const
 {
 	return (numerator * other.denominator) >= (other.numerator * denominator); // Cross-multiply to compare fractions
+}
+
+//Thanh added this
+ostream& operator<<(ostream& out, const RationalNumber& rational)
+{
+	if (rational.denominator == 0)
+	{
+		out << "undefined";
+	}
+	else
+	{
+		out << rational.numerator << "/" << rational.denominator;
+	}
+	return out;
 }

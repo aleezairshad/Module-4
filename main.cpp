@@ -1,4 +1,4 @@
-//Name: Hany, Aleeza, and Thanh
+//Name: Hany Wasef, Aleeza Irshad, and Thanh Phan
 // Date: 9/18/2026
 // Description: Module 4 - Pointer and Dynamic Memory Allocation
 
@@ -7,8 +7,8 @@
 #include <string>
 #include "input.h"
 #include "RationalNumber.h"
-#include "Polynomials.h"
-#include "ComplexNumbers.h"
+#include "Polynomial.h"
+#include "ComplexNumber.h"
 
 
 using namespace std;
@@ -163,6 +163,16 @@ void rationalOptionA(RationalNumber& rational)
 		{
 			int denominator = inputInteger("\n\t\t\tEnter an integer for the denominator: "); // Prompt the user for an integer value and validate the input to ensure it is an integer
 			// Check if the denominator is zero and prompt the user to enter a valid denominator if it is
+
+			//Thanh modified this part
+			rational.setDenominator(denominator);
+			cout << "\n";
+			// end of modification
+
+
+			// Original
+			/*
+
 			while (denominator == 0)
 			{
 				cout << "\t\t\tERROR: Denominator cannot be zero.\n";
@@ -170,11 +180,16 @@ void rationalOptionA(RationalNumber& rational)
 			}
 			rational.setDenominator(denominator);
 			cout << "\n";
+
+			*/
+
 			system("pause");
 			break;
 		}
 		case '3': // Display the rational number in the form of a fraction
 		{
+			cout << "\n\t\tRational number R1 = " << rational;
+			/*
 			if (rational.getDenominator() == 0) // Check if the denominator is zero and display "undefined" if it is
 			{
 				cout << "\n\t\t\tRational number R1 = undefine\n";
@@ -183,6 +198,7 @@ void rationalOptionA(RationalNumber& rational)
 			{
 				cout << "\n\t\t\tRational number R1 = " << rational.getNumerator() << "/" << rational.getDenominator() << "\n";
 			}
+			*/
 			cout << "\n";
 			system("pause");
 			break;
@@ -192,7 +208,12 @@ void rationalOptionA(RationalNumber& rational)
 			RationalNumber R2(rational);
 			R2.normalize();
 			cout << "\n\t\t\tNormalized rational number R2 (a copy of R1)\n\n\t\t\t";
+			
+			cout << R2;
+			//Thanh modified this
+			/*
 			R2.display();
+			*/
 			cout << "\n\n";
 			system("pause");
 
@@ -203,8 +224,14 @@ void rationalOptionA(RationalNumber& rational)
 			RationalNumber R2(rational);
 			R2.negate();
 			cout << "\n\t\t\tNegated rational number R2 (a copy of R1)\n\n\t\t\t";
+			//Thanh modified this
+			cout << "-(" << rational.getNumerator() << "/" << rational.getDenominator() << ") = ";
+			cout << R2;
+			//Original
+			/*
 			cout << "-(" << rational.getNumerator() << "/" << rational.getDenominator() << ") = ";
 			R2.display();
+			*/
 			cout << "\n\n";
 			system("pause");
 			break;
@@ -219,15 +246,20 @@ void rationalOptionA(RationalNumber& rational)
 			RationalNumber result2 = constant + R2; // Call the overloaded + operator to add the constant with the rational number and store the result in a new RationalNumber object
 
 			cout << "\n\t\t\tR2 + value\n\t\t\t(";
-			R2.display();
+			cout << R2;
+			//R2.display();
 			cout << ") + " << value << " = ";
-			result1.display();
+			cout << result1;
+			//result1.display();
 
 			cout << "\n\n\t\t\tvalue + R2\n\t\t\t";
 			cout << value << " + (";
-			R2.display();
+			cout << R2;
+			//R2.display();
 			cout << ") = ";
-			result2.display();
+			cout << result2;
+			
+			//result2.display();
 
 			cout << "\n\n";
 			system("pause");
@@ -244,15 +276,19 @@ void rationalOptionA(RationalNumber& rational)
 			RationalNumber result2 = constant - R2; // Call the overloaded - operator to subtract the rational number from the constant and store the result in a new RationalNumber object
 
 			cout << "\n\t\t\tR2 - value\n\t\t\t(";
-			R2.display();
+			cout << R2;
+			//R2.display();
 			cout << ") - " << value << " = ";
-			result1.display();
+			cout << result1;
+			//result1.display();
 
 			cout << "\n\n\t\t\tvalue - R2\n\t\t\t";
 			cout << value << " - (";
-			R2.display();
+			cout << R2;
+			//R2.display();
 			cout << ") = ";
-			result2.display();
+			cout << result2;
+			//result2.display();
 
 			cout << "\n\n";
 			system("pause");
@@ -269,15 +305,19 @@ void rationalOptionA(RationalNumber& rational)
 			RationalNumber result2 = constant * R2; // Call the overloaded * operator to multiply the constant with the rational number and store the result in a new RationalNumber object
 
 			cout << "\n\t\t\tR2 * value\n\t\t\t(";
-			R2.display();
+			cout << R2;
+			//R2.display();
 			cout << ") * " << value << " = ";
-			result1.display();
+			cout << result1;
+			//result1.display();
 
 			cout << "\n\n\t\t\tvalue * R2\n\t\t\t";
 			cout << value << " * (";
-			R2.display();
+			cout << R2;
+			//R2.display();
 			cout << ") = ";
-			result2.display();
+			cout << result2;
+			//result2.display();
 
 			cout << "\n\n";
 			system("pause");
@@ -294,15 +334,19 @@ void rationalOptionA(RationalNumber& rational)
 			RationalNumber result2 = constant / R2; // Call the overloaded / operator to divide the constant by the rational number and store the result in a new RationalNumber object
 
 			cout << "\n\t\t\tR2 / value\n\t\t\t(";
-			R2.display();
+			cout << R2;
+			//R2.display();
 			cout << ") / " << value << " = ";
-			result1.display();
+			cout << result1;
+			//result1.display();
 
 			cout << "\n\n\t\t\tvalue / R2\n\t\t\t";
 			cout << value << " / (";
-			R2.display();
+			cout << R2;
+			//R2.display();
 			cout << ") = ";
-			result2.display();
+			cout << result2;
+			//result2.display();
 
 			cout << "\n\n";
 			system("pause");
@@ -339,7 +383,7 @@ void rationalOptionB(RationalNumber& rational)
 		cout << "\n\t\t\t1. Enter rational number R1";
 		cout << "\n\t\t\t2. Enter rational number R2";
 		cout << "\n\t\t\t3. Verify condition operators (==, !=, >=, >, <= and <) of R1 and R2";
-		cout << "\n\t\t\t4. Evaluate arithmatic operators (+, - , * and /) of R1 and R2";
+		cout << "\n\t\t\t4. Evaluate arithmetic operators (+, - , * and /) of R1 and R2";
 		cout << "\n\t\t\t5. Evaluate (3 * (R1 + R2) / 7) / (R2 - R1 / 9) >= 621/889";
 		cout << "\n\t\t" << string(100, char(196));
 		cout << "\n\t\t\t0> Return\n";
@@ -352,17 +396,22 @@ void rationalOptionB(RationalNumber& rational)
 			int numerator = inputInteger("\n\t\t\tEnter the numerator for R1: ");
 			int denominator = inputInteger("\t\t\tEnter the denominator for R1: ");
 			// Check if the denominator is zero and prompt the user to enter a valid denominator if it is
+			
+			//Thanh modified this
+			/*
 			while (denominator == 0)
 			{
 				cout << "\t\t\tERROR: Denominator cannot be zero.\n";
 				denominator = inputInteger("\t\t\tEnter the denominator for R1: ");
 			}
-
+			*/
 			R1.setNumerator(numerator); // Set the numerator of R1 to the user input
 			R1.setDenominator(denominator); // Set the denominator of R1 to the user input
 			R1.normalize(); // Normalize R1 to its simplest form
 			cout << "\n\t\t\tR1 = ";
-			R1.display();
+			cout << R1;
+			//Thanh modified this
+			//R1.display();
 			cout << "\n\n";
 			system("pause");
 			break;
@@ -372,16 +421,23 @@ void rationalOptionB(RationalNumber& rational)
 			int numerator = inputInteger("\n\t\t\tEnter the numerator for R2: ");
 			int denominator = inputInteger("\t\t\tEnter the denominator for R2: ");
 			// Check if the denominator is zero and prompt the user to enter a valid denominator if it is
+			
+			//Thanh modified this
+			/*
 			while (denominator == 0)
 			{
 				cout << "\t\t\tERROR: Denominator cannot be zero.\n";
 				denominator = inputInteger("\t\t\tEnter the denominator for R2: ");
 			}
+			*/
 			R2.setNumerator(numerator); // Set the numerator of R2 to the user input
 			R2.setDenominator(denominator); // Set the denominator of R2 to the user input
 			R2.normalize(); // Normalize R2 to its simplest form
 			cout << "\n\t\t\tR2 = ";
-			R2.display();
+			cout << R2;
+			
+			//Thanh modified this
+			//R2.display();
 			cout << "\n\n";
 			system("pause");
 			break;
@@ -389,6 +445,49 @@ void rationalOptionB(RationalNumber& rational)
 		case '3': // Verify the condition operators (==, !=, >=, >, <= and <) of R1 and R2 and display the results
 		{
 			cout << boolalpha; // Set the output format to display boolean values as "true" or "false" instead of 1 or 0
+			if (R1.getDenominator() == 0 || R2.getDenominator() == 0)
+			{
+				cout << "\n\t\tR1 == R2 -> (" << R1 << ") == (" << R2 << ") ? undefined";
+			}
+			else
+				cout << "\n\t\tR1 == R2 -> (" << R1 << ") == (" << R2 << ") ? " << (R1 == R2);
+			
+			if (R1.getDenominator() == 0 || R2.getDenominator() == 0)
+			{
+				cout << "\n\t\tR2 != R1 -> (" << R2 << ") != (" << R1 << ") ? undefined";
+			}
+			else
+				cout << "\n\t\tR2 != R1 -> (" << R2 << ") != (" << R1 << ") ? " << (R2 != R1);
+
+			if (R1.getDenominator() == 0 || R2.getDenominator() == 0)
+			{
+				cout << "\n\t\tR1 >= R2 -> (" << R1 << ") >= (" << R2 << ") ? undefined";
+			}
+			else
+				cout << "\n\t\tR1 >= R2 -> (" << R1 << ") >= (" << R2 << ") ? " << (R1 >= R2);
+			
+			if (R1.getDenominator() == 0 || R2.getDenominator() == 0)
+			{
+				cout << "\n\t\tR2 > R1 -> (" << R2 << ") > (" << R1 << ") ? undefined";
+			}
+			else
+				cout << "\n\t\tR2 > R1 -> (" << R2 << ") > (" << R1 << ") ? " << (R2 > R1);
+			
+			if (R1.getDenominator() == 0 || R2.getDenominator() == 0)
+			{
+				cout << "\n\t\tR1 <= R2 -> (" << R1 << ") <= (" << R2 << ") ? undefined";
+			}
+			else
+				cout << "\n\t\tR1 <= R2 -> (" << R1 << ") <= (" << R2 << ") ? " << (R1 <= R2);
+			
+			if (R1.getDenominator() == 0 || R2.getDenominator() == 0)
+			{
+				cout << "\n\t\tR2 < R1 -> (" << R2 << ") < (" << R1 << ") ? undefined";
+			}
+			else
+				cout << "\n\t\tR2 < R1 -> (" << R2 << ") < (" << R1 << ") ? " << (R2 < R1);
+			//Thanh modified this
+			/*
 			cout << "\n\t\t\tR1 == R2 -> (";
 			R1.display();
 			cout << ") == (";
@@ -421,6 +520,7 @@ void rationalOptionB(RationalNumber& rational)
 			cout << ")  < (";
 			R1.display();
 			cout << ") ? " << (R2 < R1); // Display the result of the less than operator (<) between R2 and R1
+			*/
 
 			cout << "\n\n";
 			system("pause");
@@ -431,8 +531,17 @@ void rationalOptionB(RationalNumber& rational)
 			RationalNumber addition = R1 + R2; // Call the overloaded + operator to add R1 and R2 and store the result in a new RationalNumber object
 			RationalNumber subtraction = R2 - R1; // Call the overloaded - operator to subtract R1 from R2 and store the result in a new RationalNumber object
 			RationalNumber multiplication = R1 * R2; // Call the overloaded * operator to multiply R1 and R2 and store the result in a new RationalNumber object
-
+			//Thanh added this
+			RationalNumber division = R2 / R1; // Call the overloaded * operator to divide R1 and R2 and store the result in a new RationalNumber object
 			// Display the results of the arithmetic operations
+			cout << "\n\t\t\tAddition      : R1 + R2 -> (" << R1 << ") + (" << R2 << ") = " << addition;
+			cout << "\n\t\t\tSubtraction   : R1 - R2 -> (" << R1 << ") - (" << R2 << ") = " << subtraction;
+			cout << "\n\t\t\tMultiplication: R1 + R2 -> (" << R1 << ") * (" << R2 << ") = " << multiplication;
+			cout << "\n\t\t\tAddition      : R1 + R2 -> (" << R1 << ") + (" << R2 << ") = " << division;
+			//end of adding
+
+			//Original
+			/*
 			cout << "\n\t\t\tAddition      : R1 + R2 -> (";
 			R1.display();
 			cout << ") + (";
@@ -470,7 +579,7 @@ void rationalOptionB(RationalNumber& rational)
 				RationalNumber division = R2 / R1;
 				division.display();
 			}
-
+			*/
 			cout << "\n\n";
 			system("pause");
 			break;
@@ -480,8 +589,38 @@ void rationalOptionB(RationalNumber& rational)
 			const int THREE = 3;
 			const int SEVEN = 7;
 			const int NINE = 9;
+			//Thanh added this
+			const int ONE = 1; //This is for the integer
 
 			RationalNumber R3(621, 889); // Create a RationalNumber object with the value 621/889 to compare with the result of the expression
+			cout << "\n\t\tEvaluating expression...";
+			cout << "\n\t\t\t (3 * (R1 + R2) / 7) / (R2 - R1 / 9) >= " << R3 << " ?";
+			//Step 1: Resolve operator inside both parentheses
+			RationalNumber left1 = R1 + R2;
+			RationalNumber right1 = R1 / RationalNumber(NINE, 1);
+			cout << "\n\t\tstep #1: (3 * (" << left1 << ") / 7) / (R2 - (" << right1 << ")) >= " << R3 << " ?";
+			//Step 2: Resolve multiplication on the left
+			RationalNumber left2 = RationalNumber(THREE, 1) * left1;
+			RationalNumber right2 = R2 - right1;
+			cout << "\n\t\tstep #2: ((" << left2 << ") / 7) / (" << right2 << ") >= " << R3 << " ?";
+			//Step 3: Divide left side by 7
+			RationalNumber left3 = left2 / RationalNumber(SEVEN, 1);
+			cout << "\n\t\tstep #3: (" << left3 << ") / (" << right2 << ") >= " << R3 << " ?";
+			//Step 4: Divide 2 sides
+			RationalNumber result = left3 / right2;
+			cout << "\n\t\tstep #4: (" << result << ") >= " << R3 << " ?";
+			//Step 5: Compare
+			cout << boolalpha;
+			if (result.getDenominator() == 0 || R3.getDenominator() == 0)
+			{
+				cout << "\n\t\tstep#5: undefined";
+			}
+			else
+				cout << "\n\t\tstep#5: " << (result >= R3);
+
+			
+			//Original
+			/*
 			cout << "\n\t\t\tR1 = ";
 			R1.display();
 			cout << "\n\t\t\tR2 = ";
@@ -548,6 +687,7 @@ void rationalOptionB(RationalNumber& rational)
 			// Step 5: Compare step4 with R3
 			bool result = step4Num * static_cast<long long>(R3.getDenominator()) >= static_cast<long long>(R3.getNumerator()) * step4Denom; // Compare the two fractions by cross-multiplying to avoid floating-point precision issues
 			cout << "\n\t\t\t   step #5: " << boolalpha << result;
+			*/
 			cout << "\n\n";
 			system("pause");
 			break;
@@ -603,7 +743,7 @@ void reduceFraction(long long& numerator, long long& denominator)
 //postcondition: displays information about polynomials and provides options for the user to perform operations on polynomials
 void displayPolynomial()
 {
-	Polynomials polynomial;
+	Polynomial polynomial;
 	bool running = true;
 	char option;
 	while (running)
@@ -628,8 +768,8 @@ void displayPolynomial()
 		case 'B':
 		{
 			system("cls");
-			Polynomials first; // Create an instance of the Polynomials class to represent the first polynomial
-			Polynomials second; // Create an instance of the Polynomials class to represent the second polynomial
+			Polynomial first; // Create an instance of the Polynomials class to represent the first polynomial
+			Polynomial second; // Create an instance of the Polynomials class to represent the second polynomial
 			cout << "\n\tB> Two Polynomials";
 			int terms = inputInteger("\n\t\tEnter the number of terms(1..100) for the first polynomial (P1): ", 1, 100);
 			first.setTerm(terms);
@@ -685,7 +825,7 @@ void displayPolynomial()
 //postcondition: displays information about polynomials and provides options for the user to perform operations on a single polynomial
 void displayPolynomialMenuA()
 {
-	Polynomials polynomial;
+	Polynomial polynomial;
 	bool running = true;
 	char option;
 	while (running)
@@ -726,7 +866,7 @@ void displayPolynomialMenuA()
 				cout << "\n\t\tEnter the coefficient for term #" << i + 1 << ": ";
 
 				double coefficientIndex = inputDouble("");
-				coefficientIndex += polynomial.getCoefficient(i); // Add the new coefficient to the existing coefficient for the term
+				//coefficientIndex = polynomial.getCoefficient(i); // Add the new coefficient to the existing coefficient for the term
 				polynomial.setCoefficient(i, coefficientIndex);  // Update the coefficient for the term with the new value
 			}
 			cout << "\n\t\tThe P(x) is entered: " << polynomial << "\n\n"; // Display the polynomial entered by the user
@@ -785,7 +925,7 @@ void displayPolynomialMenuA()
 				break;
 			}
 
-			Polynomials derivative = polynomial.derivative(); // Call the derivative() function to calculate the derivative of the polynomial and store the result in a new Polynomials object
+			Polynomial derivative = polynomial.derivative(); // Call the derivative() function to calculate the derivative of the polynomial and store the result in a new Polynomials object
 			cout << "\n\t\tPolynomial(x) = " << polynomial;
 			cout << "\n\n\t\tDerivative    = " << derivative << "\n\n";
 
@@ -809,7 +949,7 @@ void displayPolynomialMenuA()
 				system("pause");
 				break;
 			}
-			Polynomials integral = polynomial.integral(); // Call the integral() function to calculate the integral of the polynomial and store the result in a new Polynomials object
+			Polynomial integral = polynomial.integral(); // Call the integral() function to calculate the integral of the polynomial and store the result in a new Polynomials object
 			cout << "\n\t\tPolynomial(x) = " << polynomial;
 			cout << "\n\n\t\tIntegral      = " << integral << "\n\n";
 
@@ -831,7 +971,7 @@ void displayComplexNumbers()
 {
 	bool running = true;
 	char option;
-	ComplexNumbers c1, c2;
+	ComplexNumber c1, c2;
 
 	while (running)
 	{
@@ -877,7 +1017,7 @@ void complexNumbersOptionA()
 	bool running = true;
 	int option;
 
-	ComplexNumbers c1;
+	ComplexNumber c1;
 
 	while (running)
 	{
@@ -930,7 +1070,7 @@ void complexNumbersOptionA()
 		case 4:
 		{
 			// Make C2 a copy of C1
-			ComplexNumbers c2 = c1;
+			ComplexNumber c2 = c1;
 
 			cout << "\n\t\tNegated the complex number C2 (a copy of C1)\n";
 
@@ -941,7 +1081,7 @@ void complexNumbersOptionA()
 		}
 		case 5:
 		{
-			ComplexNumbers c2 = c1;
+			ComplexNumber c2 = c1;
 
 			double value = inputDouble("\n\t\tEnter a value (double): ");
 
@@ -956,7 +1096,7 @@ void complexNumbersOptionA()
 		}
 		case 6:
 		{
-			ComplexNumbers R2 = c1;
+			ComplexNumber R2 = c1;
 
 			double value = inputDouble("\n\t\tEnter a value (double): ");
 
@@ -971,7 +1111,7 @@ void complexNumbersOptionA()
 		}
 		case 7:
 		{
-			ComplexNumbers c2 = c1;
+			ComplexNumber c2 = c1;
 
 			double value = inputDouble("\n\t\tEnter a value (double): ");
 
@@ -986,7 +1126,7 @@ void complexNumbersOptionA()
 		}
 		case 8:
 		{
-			ComplexNumbers c2 = c1;
+			ComplexNumber c2 = c1;
 
 			double value = inputDouble(
 				"\n\t\tEnter a value (double): ");
@@ -1037,9 +1177,9 @@ void complexNumbersOptionB()
 {
 	bool running = true;
 	int option;
-	ComplexNumbers C1;
-	ComplexNumbers C2;
-	ComplexNumbers C3(1.07109, 0.120832);
+	ComplexNumber C1;
+	ComplexNumber C2;
+	ComplexNumber C3(1.07109, 0.120832);
 
 	while (running)
 	{
@@ -1063,7 +1203,7 @@ void complexNumbersOptionB()
 		{
 			double real = inputDouble("\n\t\tEnter a number (double value) for the real part of C1: ");
 			double imag = inputDouble("\t\tEnter a number (double value) for the imaginary part of C1: ");
-			C1 = ComplexNumbers(real, imag);
+			C1 = ComplexNumber(real, imag);
 			cout << "\n\t\tC1 = " << C1 << "\n\n";
 			system("pause");
 			break;
@@ -1072,7 +1212,7 @@ void complexNumbersOptionB()
 		{
 			double real = inputDouble("\n\t\tEnter a number (double value) for the real part of C2: ");
 			double imag = inputDouble("\t\tEnter a number (double value) for the imaginary part of C2: ");
-			C2 = ComplexNumbers(real, imag);
+			C2 = ComplexNumber(real, imag);
 			cout << "\n\t\tC2 = " << C2 << "\n\n";
 			system("pause");
 			break;
@@ -1097,11 +1237,11 @@ void complexNumbersOptionB()
 			break;
 		case 5:
 		{
-			ComplexNumbers sum = C1 + C2;
-			ComplexNumbers threeTimesSum = 3.0 * sum;
-			ComplexNumbers c1Over9 = C1 / 9.0;
-			ComplexNumbers denom = C2 - c1Over9;
-			ComplexNumbers threeTimesSumOver7 = threeTimesSum / 7.0;
+			ComplexNumber sum = C1 + C2;
+			ComplexNumber threeTimesSum = 3.0 * sum;
+			ComplexNumber c1Over9 = C1 / 9.0;
+			ComplexNumber denom = C2 - c1Over9;
+			ComplexNumber threeTimesSumOver7 = threeTimesSum / 7.0;
 
 			cout << "\n\t\tC1 = " << C1;
 			cout << "\n\t\tC2 = " << C2;
@@ -1119,7 +1259,7 @@ void complexNumbersOptionB()
 			}
 			else
 			{
-				ComplexNumbers result = threeTimesSumOver7 / denom;
+				ComplexNumber result = threeTimesSumOver7 / denom;
 				cout << boolalpha;
 				cout << "\n\t\t   step #4: (" << result << ") != (" << C3 << ") ?";
 				cout << "\n\t\t   step #5: " << (result != C3) << "\n\n";

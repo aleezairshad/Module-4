@@ -1,5 +1,6 @@
 #pragma once
-
+#include <iostream>
+using namespace std;
 class RationalNumber
 {
 private:
@@ -32,6 +33,7 @@ public:
 	bool operator>(const RationalNumber& other) const;	//overloaded > operator
 	bool operator>=(const RationalNumber& other) const; //overloaded >= operator
 
-
+	//Thanh added this
+	friend ostream& operator<<(ostream& out, const RationalNumber& rational);
 };
 

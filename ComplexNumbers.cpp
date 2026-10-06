@@ -146,18 +146,72 @@ bool ComplexNumbers::operator!=(const ComplexNumbers& other) const
 
 //precondition: out is a valid ostream object and number is a valid ComplexNumbers object
 //postcondition: inserts the complex number into the output stream in the form "a + bi" or "a - bi"
-ostream& operator<<(ostream& out, const ComplexNumbers& number)
+ostream& operator<<(ostream& out, const ComplexNumber& number)
 {
-    out << number.real;
-    if (number.imaginary > 0)
+    if (number.real == 0.0 && number.imaginary == 0.0)
     {
-        out << " + " << number.imaginary << "i";
-    }
-    else if (number.imaginary < 0)
-    {
-        out << " - " << -number.imaginary << "i";
+        out << 0;
+        return out;
     }
 
+    if (number.real == 0.0)
+    {
+        //Thanh added something here!!
+        if (number.imaginary == 1)
+        {
+            out << "i";
+        }
+        else if (number.imaginary == -1)
+        {
+            out << "-i";
+        }
+        else
+        {
+            out << number.imaginary << "i";
+        }
+        //end of amendment
+
+        return out;
+
+        //original
+        //out << number.imaginary << "i";
+        //return out;
+    }
+
+    out << number.real;
+
+    //Thanh added something here!!
+    if (number.imaginary > 0.0)
+    {
+        if (number.imaginary == 1)
+        {
+            out << " + i";
+        }
+        else
+        {
+            out << " + " << number.imaginary << "i";
+        }
+    }
+    else if (number.imaginary < 0.0)
+    {
+        if (number.imaginary == -1)
+        {
+            out << " - i";
+        }
+        else
+        {
+            out << " - " << -number.imaginary << "i";
+        }
+    }
+    //end of amendment
+
+    //original
+    /*
+        if (number.imaginary > 0.0)
+        out << " + " << number.imaginary << "i";
+    else if (number.imaginary < 0.0)
+        out << " - " << -number.imaginary << "i";
+    */
     return out;
 }
 
